@@ -1,6 +1,6 @@
 package ru.coold.geoquiz;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,7 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class QuizActivity extends ActionBarActivity {
+public class QuizActivity extends Activity {
+
+    private static final String TAG = "QuizActivity";
+    private static final String KEY_INDEX = "index";
 
     private Button mTrueButton;
     private Button mFalseButton;
@@ -33,6 +36,9 @@ public class QuizActivity extends ActionBarActivity {
         setContentView(R.layout.activity_quiz);
 
         mQuestionTextView = (TextView)findViewById(R.id.question_text_view);
+        if(savedInstanceState!=null){
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+        }
         updateQuestion();
 
         mQuestionTextView.setOnClickListener(new View.OnClickListener(){
@@ -79,6 +85,12 @@ public class QuizActivity extends ActionBarActivity {
                 updateQuestion();
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_INDEX, mCurrentIndex);
     }
 
 
