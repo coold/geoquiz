@@ -1,7 +1,9 @@
 package ru.coold.geoquiz;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,7 +42,10 @@ public class QuizActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            ActionBar actionBar = getActionBar();
+            actionBar.setSubtitle("Ololo Lo");
+        }
         mQuestionTextView = (TextView)findViewById(R.id.question_text_view);
         if(savedInstanceState!=null){
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);

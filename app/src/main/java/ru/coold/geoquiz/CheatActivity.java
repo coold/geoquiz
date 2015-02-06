@@ -2,6 +2,7 @@ package ru.coold.geoquiz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ public class CheatActivity extends Activity {
     private boolean mAnswerIsTrue;
     private TextView mAnswerTextView;
     private Button mShowAnswer;
+    private TextView mApiLevel;
 
     private void setAnswerShownResult(boolean isAnswerShown){
         Intent data = new Intent();
@@ -30,6 +32,9 @@ public class CheatActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cheat);
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
+
+        mApiLevel = (TextView)findViewById(R.id.api_level);
+        mApiLevel.setText("API Level "+ Build.VERSION.SDK_INT);
 
         mAnswerTextView = (TextView)findViewById(R.id.answerTextView);
         if (savedInstanceState!=null) mCheated = savedInstanceState.getBoolean(CHEATED, false);
